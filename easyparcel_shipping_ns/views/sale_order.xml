@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="easyparcel_ns_sale_order" model="ir.ui.view">
+            <field name="name">easyparcel.sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="easyparcel_service" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="inherited_payment_delivery_mondial"
+              inherit_id="website_sale_delivery.payment_delivery">
+        <xpath expr="//div[@id='delivery_method']" position="inside">
+            <input id="sale_order_mondial_js" t-if="order" name="sale_order"
+                   type="hidden" t-att-value="order.id"/>
+        </xpath>
+    </template>
+
+    <template id="easyparcel_carrier_service"
+              name="mondial_relay Shipping Location">
+        <div class="form-group col-lg-12 div_location mondial_relay_loc_js">
+            <input id="easyparcel_service" name="easyparcel_service"
+                   type="hidden"/>
+            <p class="mt16">
+                <button type="button" class="btn btn-primary"
+                        name="easyparcel_get_carriers" data-toggle="modal" data-target="#mondial_relayId">
+                    <span class="mr4">Get Available Service</span>
+                    <i class="fa fa-arrow-right "></i>
+                </button>
+
+                <p class="disp_location mt16 mb0"></p>
+            </p>
+
+            <span class="set_address"></span>
+            <!--&lt;!&ndash; Modal &ndash;&gt;-->
+            <div class="modal fade" id="mondial_relayId" tabindex="-1" open="open"
+                 style="z-index: 1045;"
+                 role="dialog">
+                <div class="modal-dialog">
+                    <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="modal-title pull-left">EasyParcel Carrier Service</span>
+                            <button type="button" class="close pull-right"
+                                    data-dismiss="modal">x
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="loader"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" name="close" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Json Data Call -->
+    <template id="easyparcel_carrier_details" name="Location Details">
+            <table id="service_table_js" class="table" style="width:100%">
+                <tr>
+                    <th>Courier</th>
+                    <th>Service</th>
+                    <th>Delivery Day</th>
+                    <th>Service ID</th>
+                    <th>Price</th>
+                </tr>
+                <br/>
+                <t t-foreach="locations" t-as="location">
+                    <tr t-if="location">
+                        <td t-esc="location.courier_name"></td>
+                        <td t-esc="location.service_name"></td>
+                        <td t-esc="location.delivery"></td>
+                        <td t-esc="location.service_id"></td>
+                        <td class="text-right">
+						<button type="button"
+							class="btn btn-success set_easyparcel_carrier_service" name="set_easyparcel_carrier_service">
+                            <b>
+                                <t t-esc="location.price" />
+                            </b>
+						</button>
+						<input type="hidden" name="location" t-att-value="location.id"></input>
+					</td>
+                    </tr>
+                </t>
+            </table>
+    </template>
+</odoo>

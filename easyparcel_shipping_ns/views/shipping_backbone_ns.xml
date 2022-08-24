@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="easyparcel_credential" model="ir.ui.view">
+            <field name="name">easyparcel.credential</field>
+            <field name="model">shipping.backbone.ns</field>
+            <field name="inherit_id" ref="shipping_backbone_ns.shipping_backbone_ns_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='credential_page']" position="inside">
+                    <group attrs="{'invisible':[('shipping_provider','!=','easyparcel')]}">
+                        <group>
+                            <field name="easyparcel_api_key" attrs="{'required':[('shipping_provider','=','easyparcel')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

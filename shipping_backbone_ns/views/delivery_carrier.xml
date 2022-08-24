@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="shipping_backbone_ns_form_view" model="ir.ui.view">
+            <field name="name">Shipping Backbone Form View</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='integration_level']" position="after">
+                    <field name="shipping_provider_ns" />
+<!--                    <field name="custom_rates_flag" invisible="1" />-->
+<!--                    <field name="custom_rate_charge_type"  attrs="{'invisible': ['|', '|', ('custom_rates_flag','=',False), ('delivery_type', '==', 'based_on_rule'), ('delivery_type', '==', 'fixed')]}"/>-->
+                </xpath>
+
+                <xpath expr="//page[1]" position="before">
+<!--                <page string="Custom Rates" attrs="{'invisible': ['|', ('delivery_type', 'in', ('fixed','base_on_rule')), ('custom_rates_flag', '!=', True)] } ">-->
+<!--                    <group-->
+<!--                            attrs="{'invisible':['|',('delivery_type', '==', 'base_on_rule'),('custom_rate_charge_type', '==', 'base_on_rule')]}">-->
+<!--                        <group>-->
+<!--                            <field name="fixed_price"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group name="general"-->
+<!--                           attrs="{'invisible':['|',('delivery_type', '==', 'fixed'),('custom_rate_charge_type', '==', 'fixed')]}">-->
+<!--                        <field name="price_rule_ids" nolabel="1"/>-->
+<!--                    </group>-->
+<!--                </page>-->
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

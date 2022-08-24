@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="shipping_backbone_ns_view_tree" model="ir.ui.view">
+            <field name="name">shipping_backbone_ns_view_tree</field>
+            <field name="model">shipping.backbone.ns</field>
+            <field name="arch" type="xml">
+                <tree string="Shipping BackBone">
+                    <field name="shipping_provider"/>
+                </tree>
+            </field>
+        </record>
+        <record id="shipping_backbone_ns_view_form" model="ir.ui.view">
+            <field name="name">shipping_backbone_ns_view_form</field>
+            <field name="model">shipping.backbone.ns</field>
+            <field name="arch" type="xml">
+                <form string="shipping_backbone">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="button_delivery_method" class="oe_stat_button" icon="fa-truck" type="object"
+                                    help="Contracts Reviews" string="Delivery Method">
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="shipping_provider"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="credential_page" string="Credential">
+
+                            </page>
+                            <page name="configuration_page" string="Configuration">
+                                <group>
+                                    <group>
+                                        <field name="use_warehouse_address" widget="boolean_toggle"/>
+                                        <field name="sender_address"
+                                               attrs="{'invisible': [('use_warehouse_address','=',True)]}"/>
+                                    </group>
+                                    <group>
+<!--                                        <field name="custom_rates_flag" widget="boolean_toggle"/>-->
+                                        <field name="auto_send_mail" widget="boolean_toggle"/>
+                                        <field name="mail_template_id"  attrs="{'invisible': [('auto_send_mail','=',False)]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        kanban view -->
+        <record id="shipping_backbone_ns_kanban_view" model="ir.ui.view">
+            <field name="name">shipping backbone ns kanban view</field>
+            <field name="model">shipping.backbone.ns</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_account_kanban">
+                    <field name="name"/>
+                    <field name="color"/>
+                    <field name="shipping_provider" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                                <t t-value="record.shipping_provider.raw_value" t-set="shipping_provider"/>
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary">
+                                            <a type="object" name="shipping_backbone_open_instance_view">
+                                                <field name="name"/>
+                                            </a>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <a class="o_kanban_manage_toggle_button" href="#">
+                                            <i class="fa fa-ellipsis-v" aria-label="Selection" role="img"
+                                               title="Selection"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <div class="row mt16">
+                                        <div class="col-6 border-right">
+                                            <a name="delivery_order_instance_view"
+                                               type="object" class="d-flex flex-column align-items-center">
+                                                <span class="font-weight-bold">
+                                                    <i class="fa fa-truck" />
+                                                </span>
+                                                <span class="text-muted">Delivery Orders</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-3 ">
+                                            <a name="action_redirect_to_process"
+                                               href="mailto:contact@nsinfosystem.com?subject=[Help] Need Some Help in Shipping Connector - V12" class="d-flex flex-column align-items-center">
+                                                <span>
+                                                    <i class="fa fa-comments" />
+                                                </span>
+                                                <span class="text-muted">Need Help?</span>
+                                            </a>
+                                        </div>
+                                        <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                            <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                                <div class="col-8" role="menuitem" aria-haspopup="true">
+                                                    <ul role="menu" class="oe_kanban_colorpicker" data-field="color"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record id="shipping_backbone_ns_action" model="ir.actions.act_window">
+        <field name="name">Shipping Backbone</field>
+        <field name="res_model">shipping.backbone.ns</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+    <menuitem id="shipping_backbone_ns_root" name="Shipping Backbone"
+              action="shipping_backbone_ns.shipping_backbone_ns_action"
+              web_icon="shipping_backbone_ns,static/shipping_icon.jpg"/>
+</data>
+        </odoo>
