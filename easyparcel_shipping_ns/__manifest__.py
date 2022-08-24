@@ -7,7 +7,7 @@
     'summary': "This integration helps to connect Easyparcel to your Odoo E-commerce website. You can perform various operations like get live shipping rate, generate shipment labels, track shipment. Couriers include J&T, Pos Laju, Pgeon, Skynet and many more.",
     "description": "Easyparcel Shipping Connector",
     "author": "Wizeewig (Softlakes Sdn. Bhd)",
-    "depends": ['shipping_backbone_ns', 'website_sale', 'website_sale_delivery'],
+    "depends": ['website_sale', 'website_sale_delivery'],
     "data": [
         'security/ir.model.access.csv',
         'views/template.xml',
