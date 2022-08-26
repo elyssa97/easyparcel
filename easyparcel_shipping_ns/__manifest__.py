@@ -28,7 +28,7 @@
     'application': True,
     'qweb': [],
 
-    'images': ['static/description/EasyParcel-logo-dark.png' , 'EasyParcel-TransparentSquare.png'] ,
+    'images': ['static/description/EasyParcel-logo-dark.png' , 'static/description/icon.png'] ,
 
     "website": "https://www.wiz.asia",
     'support': 'help@wiz.asia',
